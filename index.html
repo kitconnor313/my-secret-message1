@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>解密选择</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  width:100vw;
+  height:100vh;
+  font-family:system-ui,sans-serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:#f8f8f8;
+}
+/* 黑屏遮罩 */
+#blackMask{
+  position:fixed;
+  top:0;left:0;
+  width:100vw;height:100vh;
+  background:#000;
+  display:none;
+  z-index:999;
+}
+/* 选择区域 */
+.choose-box{
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+.btn-yes,.btn-no{
+  padding:14px 36px;
+  font-size:18px;
+  border:none;
+  border-radius:8px;
+  background:#333;
+  color:#fff;
+  cursor:pointer;
+}
+/* 中间透明OR按钮 */
+.btn-or{
+  padding:14px 36px;
+  font-size:18px;
+  background:transparent;
+  color:transparent;
+  border:none;
+  cursor:pointer;
+}
+/* 题目面板 默认隐藏 */
+#quizPanel{
+  display:none;
+  width:90%;
+  max-width:500px;
+  padding:25px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 0 15px #0002;
+  margin-top:30px;
+  text-align:center;
+}
+.desc{
+  font-size:16px;
+  line-height:1.7;
+  margin-bottom:20px;
+}
+.question{
+  text-align:left;
+  font-size:15px;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+#answerInput{
+  width:80%;
+  padding:10px;
+  font-size:16px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  text-align:center;
+}
+#tipText{
+  margin-top:15px;
+  font-size:16px;
+  color:#228B22;
+  display:none;
+}
+</style>
+</head>
+<body>
+
+<!-- 黑屏层 -->
+<div id="blackMask"></div>
+
+<!-- 选择按钮 -->
+<div class="choose-box">
+  <button class="btn-yes">Yes</button>
+  <button class="btn-or">or</button>
+  <button class="btn-no">No</button>
+</div>
+
+<!-- 题目面板 -->
+<div id="quizPanel">
+  <div class="desc">
+    你也许是所有人中最聪明的那个<br>
+    让我继续见识见识你的聪明才智吧！
+  </div>
+  <div class="question">
+人类的白化病是由常染色体上的隐性基因 a 控制的遗传病，肤色正常由显性基因 A 控制。人类的ABO血型受 Iᴀ、Iʙ、i 三个复等位基因控制，其中 Iᴀ 和 Iʙ 对 i 为显性，Iᴀ 与 Iʙ 为共显性（即基因型 IᴀIʙ 表现为AB型血）。假设这两对基因独立遗传。
+<br><br>
+小明的父亲表现正常，为A型血；母亲表现正常，为B型血。他们生了一个男孩小明，小明患有白化病，且血型为O型。
+<br><br>
+问题：若小明的父母再生一个孩子，该孩子表现正常且为AB型血的概率是？
+  </div>
+  <input type="text" id="answerInput" placeholder="请输入答案">
+  <div id="tipText">凭截图找我</div>
+</div>
+
+<script>
+// 获取元素
+const mask = document.getElementById('blackMask');
+const yesBtn = document.querySelector('.btn-yes');
+const noBtn = document.querySelector('.btn-no');
+const orBtn = document.querySelector('.btn-or');
+const quizPanel = document.getElementById('quizPanel');
+const input = document.getElementById('answerInput');
+const tip = document.getElementById('tipText');
+
+// 点Yes No 黑屏
+yesBtn.onclick = ()=> mask.style.display = 'block';
+noBtn.onclick = ()=> mask.style.display = 'block';
+
+// 点OR 显示题目面板
+orBtn.onclick = ()=> quizPanel.style.display = 'block';
+
+// 输入答案校验
+input.oninput = function(){
+  if(this.value.trim() === '3/16'){
+    tip.style.display = 'block';
+  }else{
+    tip.style.display = 'none';
+  }
+}
+</script>
+
+</body>
+</html>
